@@ -11,7 +11,6 @@ from sklearn import metrics
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM
-import logging
 
 # Definicje ogólne
 today = date.today()
