@@ -3,6 +3,9 @@ name: Manual Run Silverlake.py
 on:
   workflow_dispatch:  # Pozwala na ręczne uruchamianie workflow
 
+permissions:
+  contents: write  # Dodanie uprawnień do zapisu
+
 jobs:
   run-lstm:
     runs-on: ubuntu-latest
@@ -44,25 +47,25 @@ jobs:
     - name: Pull latest changes
       run: git pull origin master
       env:
-        GITHUB_TOKEN: ${{ secrets.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 }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Commit and push results
       run: |
-        git config --global user.name 'github-actions'
-        git config --global user.email 'github-actions@github.com'
+        git config user.name 'github-actions'
+        git config user.email 'github-actions@github.com'
         git add artifacts/_fore_DX.pkl 
         git commit -m 'Add results from _fore_DX.pkl'
         git push
       env:
-        GITHUB_TOKEN: ${{ secrets.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 }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Move files
       run: |
         mv artifacts/_fore_DX.pkl .
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git config user.name 'github-actions[bot]'
+        git config user.email 'github-actions[bot]@users.noreply.github.com'
         git add _fore_DX.pkl
         git commit -m 'Move _fore_DX.pkl from artifacts to root directory'
         git push origin master  
-    env:
-        GITHUB_TOKEN: ${{ secrets.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 }}   
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
