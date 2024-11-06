@@ -47,7 +47,7 @@ jobs:
     - name: Pull latest changes
       run: git pull origin master
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PAT }}
 
     - name: Commit and push results
       run: |
@@ -57,7 +57,7 @@ jobs:
         git commit -m 'Add results from _fore_DX.pkl'
         git push
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PAT }}
 
     - name: Move files
       run: |
@@ -68,4 +68,4 @@ jobs:
         git commit -m 'Move _fore_DX.pkl from artifacts to root directory'
         git push origin master  
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PAT }}
