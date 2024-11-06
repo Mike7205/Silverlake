@@ -1,0 +1,11 @@
+streamlit
+streamlit-aggrid
+plotly
+yfinance==0.2.28
+openpyxl
+numpy>=1.22.0
+pandas
+scipy
+scikit-learn
+statsmodels
+tensorflow
