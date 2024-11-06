@@ -1,4 +1,4 @@
-name: Manual Run D1_LSTM.py
+name: Manual Run Silverlake.py
 
 on:
   workflow_dispatch:  # Pozwala na ręczne uruchamianie workflow
@@ -27,16 +27,14 @@ jobs:
         pip install -r requirements.txt  # Zakładając, że masz plik requirements.txt
         pip install git+https://github.com/statsmodels/statsmodels.git
 
-    - name: Run D1_LSTM.py
-      run: python D1_LSTM.py
+    - name: Run Silverlake.py
+      run: python Silverlake.py
 
     - name: Save results
       run: |
         mkdir -p artifacts
-        cp D1_EUR_a.pkl artifacts/
-        cp D1_USD_a.pkl artifacts/
-        cp D5_eur_tabel.pkl artifacts/
-
+        cp _fore_DX.pkl artifacts/
+        
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
@@ -52,21 +50,19 @@ jobs:
       run: |
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
-        git add artifacts/D1_EUR_a.pkl artifacts/D1_USD_a.pkl artifacts/D5_eur_tabel.pkl
-        git commit -m 'Add results from D1_LSTM.py'
+        git add artifacts/_fore_DX.pkl 
+        git commit -m 'Add results from _fore_DX.pkl'
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.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 }}
 
     - name: Move files
       run: |
-        mv artifacts/D1_EUR_a.pkl .
-        mv artifacts/D1_USD_a.pkl .
-        mv artifacts/D5_eur_tabel.pkl .
+        mv artifacts/_fore_DX.pkl .
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add D1_EUR_a.pkl D1_USD_a.pkl D5_eur_tabel.pkl
-        git commit -m 'Move D1_EUR_a.pkl and D1_USD_a.pkl and D5_eur_tabel.pkl from artifacts to root directory'
+        git add _fore_DX.pkl
+        git commit -m 'Move _fore_DX.pkl from artifacts to root directory'
         git push origin master  
     env:
         GITHUB_TOKEN: ${{ secrets.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 }}   
