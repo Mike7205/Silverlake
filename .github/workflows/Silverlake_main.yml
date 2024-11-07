@@ -37,6 +37,7 @@ jobs:
       run: |
         mkdir -p artifacts
         cp _fore_DX.pkl artifacts/
+        cp silver_fore.pkl artifacts/
         
     - name: Upload artifact
       uses: actions/upload-artifact@v3
@@ -53,8 +54,8 @@ jobs:
       run: |
         git config user.name 'github-actions'
         git config user.email 'github-actions@github.com'
-        git add artifacts/_fore_DX.pkl 
-        git commit -m 'Add results from _fore_DX.pkl'
+        git add artifacts/_fore_DX.pkl artifacts/silver_fore.pkl
+        git commit -m 'Add results from Silverlake.py'
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.PAT }}
@@ -64,8 +65,8 @@ jobs:
         mv artifacts/_fore_DX.pkl .
         git config user.name 'github-actions[bot]'
         git config user.email 'github-actions[bot]@users.noreply.github.com'
-        git add _fore_DX.pkl
-        git commit -m 'Move _fore_DX.pkl from artifacts to root directory'
+        git add _fore_DX.pkl silver_fore.pkl
+        git commit -m 'Move _fore_DX.pkl and silver_fore.pkl from artifacts to root directory'
         git push origin master  
       env:
         GITHUB_TOKEN: ${{ secrets.PAT }}
