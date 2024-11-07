@@ -131,5 +131,12 @@ past_data(3001)
 dx_cut_variables(comm, cor_min, cor_max)
 data_set_dx(comm)
 LSTM_DX_Model(data_set, time_step, column_number,  xdays, epochs_num, applications_days)
+# Wczytanie prognozowanych danych
+silver_fore = pd.read_pickle('silver_fore.pkl')
+D5_silver = pd.read_pickle('_fore_DX.pkl')
+D5_silver_fore = D5_silver.T
+D5_silver_fore.rename(columns={0: 'SILVER_FOR'}, inplace=True)      
+silver_fore = pd.concat([silver_fore, D5_silver_fore], ignore_index=True)
+silver_fore.to_pickle('silver_fore.pkl')    
 
     
