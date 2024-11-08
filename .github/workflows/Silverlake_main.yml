@@ -30,9 +30,13 @@ jobs:
         pip install -r requirements.txt  # Zakładając, że masz plik requirements.txt
         pip install git+https://github.com/statsmodels/statsmodels.git
 
-    - name: Run Silverlake.py
-      run: python Silverlake.py
-
+    - name: Run Silverlake.py 18 times
+      run: |
+        for i in {1..20}; do
+          echo "Run $i"
+          python Silverlake.py
+        done
+        
     - name: Save results
       run: |
         mkdir -p artifacts
